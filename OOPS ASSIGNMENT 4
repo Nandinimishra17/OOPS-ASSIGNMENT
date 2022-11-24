@@ -1,0 +1,158 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class Employee
+{
+        string name;
+        int id;
+    protected :
+        float salary; //not accesible in main
+    public :
+        virtual void get_val()
+        {
+        }
+        void getvalues()
+        {
+            cout<<"\n Enter data : ";
+            cin.ignore();
+            cout<<"\n Name : ";
+            getline(cin,name);
+            cout<<"\n ID : ";
+            cin>>id;
+            cout<<"\n Salary : ";
+            cin>>salary;
+
+        }
+        virtual void display()
+        {
+            cout<<"\n Base class";
+        }
+        void show()
+        {
+            cout<<"\n Employee Details : \n Name : "<<name  <<"\n ID : "<<id;
+        }
+};
+class Regular : public Employee
+{
+    float DA , HA , bs;
+    public : 
+        Regular()
+        {
+            DA = 0;
+            HA =0;
+            bs = 0;
+        }
+        void get_val()
+        {
+            cout<<"\n HA : ";
+            cin>>HA;
+            cout<<"\n DA : ";
+            cin>>DA;
+            cout<<"\n Basic salary : ";
+            cin>>bs;
+        }
+        void display()
+        {
+            salary = bs + HA + DA;
+            cout<<"\n DA : "<<DA<<"\n HA : "<<HA<<"\n Basic Salary : "<< bs << "\n Gross Pay : "<<salary;
+        }
+};
+class Parttime : public Employee
+{
+    float nohrs , payhr;
+    public :
+        Parttime()
+        {
+            nohrs=0.0;
+            payhr=0.0;
+        }
+        void get_val()
+        {
+            cout<<"\n Number of hours : ";
+            cin>>nohrs;
+            cout<<"\n Pay per hour : ";
+            cin>>payhr;
+        }
+        void display()
+        {
+            salary = nohrs*payhr;
+            cout<<"\n Pay per hour : "<<payhr<<"\n Number of hours : "<< nohrs<<"\n Gross Pay :"<<salary;
+        }
+};
+ void error()
+{
+    int a,n,r;
+    cout<<"enter the  number ";
+    cin>>a;
+    cout<<"enter the divisor";
+    cin>>n;
+    try{
+        if(n==0)
+        throw n;
+        else
+            r= a%n;
+            cout<<"Result = "<<r;
+    }
+    catch(int a){
+        cout<<" RESULT = undefined on dividing by zero ";
+    }
+}
+
+
+class otest{
+    private:
+    int a,b,c;
+    public:
+    void ini (int m,int n ,int k){
+        a=m;
+        b=n;
+        c=k;
+    }
+        
+    void d(){
+        cout<<"Values of variable before incrementatio "<<endl;
+        cout<<a<<b<<c;
+    }
+    void operator+(){
+        a+=a;
+        b+=b;
+        c+=c;
+    }
+    
+    void display(){
+        cout<<"\nValues after incrementation ";
+        cout<<a<<"\t"<<b<<"\t"<<c;
+    }
+    
+};
+
+
+
+
+int main()
+{  
+    Employee *p;
+    Regular r;
+    p=&r;
+    p->getvalues();
+    p->get_val();
+    p->show();
+    p->display();
+    Parttime pt;
+    p=&pt;
+    p->getvalues();
+    p->get_val();
+    p->show();
+    p->display();
+cout<<"\n opertor overloading\n  ";
+otest ob;
+    ob.ini(5,6,7);
+    ob.d();
+    +ob;
+    ob.display();
+ error();
+    
+
+    
+    return 0;
+    }
